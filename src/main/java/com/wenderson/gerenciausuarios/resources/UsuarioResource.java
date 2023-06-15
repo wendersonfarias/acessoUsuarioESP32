@@ -22,10 +22,10 @@ public class UsuarioResource {
 	UsuarioService service;
 	
 	@GetMapping(value="/{matricula}")
-	public ResponseEntity<UsuarioDTO> findbyMatricula(@PathVariable String matricula){
+	public ResponseEntity<Usuario> findbyMatricula(@PathVariable String matricula){
 		Usuario obj = this.service.findByMatricula(matricula);
 		
-		return ResponseEntity.ok().body(new UsuarioDTO(obj));
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@GetMapping(value="/busca-usuario/{id}")

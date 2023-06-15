@@ -1,5 +1,6 @@
 package com.wenderson.gerenciausuarios.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class UsuarioService {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
 		return obj.orElseThrow( () ->new ObjectNotFoundException("Usuario nao encontrado! id: "+id));
 		
+	}
+
+	public List<Usuario> findAll() {
+		
+		return usuarioRepository.findAll();
 	}
 
 }

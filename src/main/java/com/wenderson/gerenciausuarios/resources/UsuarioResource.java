@@ -1,5 +1,8 @@
 package com.wenderson.gerenciausuarios.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,19 +19,28 @@ import com.wenderson.gerenciausuarios.services.UsuarioService;
 public class UsuarioResource {
 
 	@Autowired
-	UsuarioService usuarioService;
+	UsuarioService service;
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<UsuarioDTO> findbyId(@PathVariable Integer id){
-		Usuario obj = this.usuarioService.findById(id);
+		Usuario obj = this.sService.findById(id);
 		
 		return ResponseEntity.ok().body(new UsuarioDTO(obj));
 	}
 	
 	@GetMapping(value="/busca-usuario/{id}")
 	public ResponseEntity<Usuario> findbyIdFront(@PathVariable Integer id){
-		Usuario obj = this.usuarioService.findById(id);
+		Usuario obj = this.service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<UsuarioDTO>> findAll(){
+		List<Usuario> lista = service.findAll();
+		List<UsuarioDTO> listaDTO = lista.stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
+			
+		return ResponseEntity.ok().body(listaDTO);
+		
 	}
 }

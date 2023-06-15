@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.wenderson.gerenciausuarios.domain.Usuario;
 import com.wenderson.gerenciausuarios.repositories.UsuarioRepository;
+import com.wenderson.gerenciausuarios.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
@@ -15,7 +16,7 @@ public class UsuarioService {
 	
 	public Usuario findById(Integer id) {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow( () ->new ObjectNotFoundException("Usuario nao encontrado! id: "+id));
 		
 	}
 

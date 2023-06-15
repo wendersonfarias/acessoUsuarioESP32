@@ -25,7 +25,7 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(new UsuarioDTO(obj));
 	}
 	
-	@GetMapping(value="/buscausuario/{id}")
+	@GetMapping(value="/busca-usuario/{id}")
 	public ResponseEntity<Usuario> findbyIdFront(@PathVariable Integer id){
 		Usuario obj = this.usuarioService.findById(id);
 		

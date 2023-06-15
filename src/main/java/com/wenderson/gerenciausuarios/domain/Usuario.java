@@ -7,26 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 653495207641280524L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
-	
+
 	@Column(unique = true)
 	protected String matricula;
-	
 
-	
 	protected String senha;
-	
-	
+
 	protected char ativo;
-	
+
 	public Usuario() {
 		super();
 	}
@@ -70,10 +66,5 @@ public class Usuario implements Serializable {
 	public void setAtivo(char ativo) {
 		this.ativo = ativo;
 	}
-	
-	
-	
-	
-	
-	
+
 }

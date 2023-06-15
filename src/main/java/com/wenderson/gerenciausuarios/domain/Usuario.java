@@ -20,10 +20,11 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	protected String matricula;
 	
-	@NotBlank
+
+	
 	protected String senha;
 	
-	@NotBlank
+	
 	protected char ativo;
 	
 	public Usuario() {

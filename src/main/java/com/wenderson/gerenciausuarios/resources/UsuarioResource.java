@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wenderson.gerenciausuarios.domain.Usuario;
+import com.wenderson.gerenciausuarios.dtos.UsuarioDTO;
 import com.wenderson.gerenciausuarios.services.UsuarioService;
 
 @RestController
@@ -18,7 +19,14 @@ public class UsuarioResource {
 	UsuarioService usuarioService;
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Usuario> findbyId(@PathVariable Integer id){
+	public ResponseEntity<UsuarioDTO> findbyId(@PathVariable Integer id){
+		Usuario obj = this.usuarioService.findById(id);
+		
+		return ResponseEntity.ok().body(new UsuarioDTO(obj));
+	}
+	
+	@GetMapping(value="/buscausuario/{id}")
+	public ResponseEntity<Usuario> findbyIdFront(@PathVariable Integer id){
 		Usuario obj = this.usuarioService.findById(id);
 		
 		return ResponseEntity.ok().body(obj);

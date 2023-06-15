@@ -9,5 +9,9 @@ import com.wenderson.gerenciausuarios.domain.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
 	Optional<Usuario> findByMatricula(String matricula);
+	
+	
+	
+	
 
 }

@@ -26,6 +26,12 @@ public class UsuarioService {
 		return obj.orElseThrow( () ->new ObjectNotFoundException("Usuario nao encontrado! id: "+matricula));
 		
 	}
+	
+	public Usuario createUsuario(Usuario usuario) {
+		usuario.setId(null);
+		return usuarioRepository.save(usuario);
+		
+	}
 
 	public List<Usuario> findAll() {
 		

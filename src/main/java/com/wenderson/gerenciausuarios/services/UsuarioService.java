@@ -20,6 +20,12 @@ public class UsuarioService {
 		return obj.orElseThrow( () ->new ObjectNotFoundException("Usuario nao encontrado! id: "+id));
 		
 	}
+	
+	public Usuario findByMatricula(String matricula) {
+		Optional<Usuario> obj = usuarioRepository.findByMatricula(matricula);
+		return obj.orElseThrow( () ->new ObjectNotFoundException("Usuario nao encontrado! id: "+matricula));
+		
+	}
 
 	public List<Usuario> findAll() {
 		

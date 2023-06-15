@@ -21,9 +21,9 @@ public class UsuarioResource {
 	@Autowired
 	UsuarioService service;
 	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<UsuarioDTO> findbyId(@PathVariable Integer id){
-		Usuario obj = this.sService.findById(id);
+	@GetMapping(value="/{matricula}")
+	public ResponseEntity<UsuarioDTO> findbyMatricula(@PathVariable String matricula){
+		Usuario obj = this.service.findByMatricula(matricula);
 		
 		return ResponseEntity.ok().body(new UsuarioDTO(obj));
 	}

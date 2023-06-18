@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wenderson.gerenciausuarios.domain.Usuario;
 import com.wenderson.gerenciausuarios.repositories.UsuarioRepository;
+import com.wenderson.gerenciausuarios.services.exceptions.DataIntegrityViolationException;
 import com.wenderson.gerenciausuarios.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -28,9 +29,17 @@ public class UsuarioService {
 	}
 	
 	public Usuario createUsuario(Usuario usuario) {
+		validaPorMatricula(usuario);
 		usuario.setId(null);
 		return usuarioRepository.save(usuario);
 		
+	}
+
+	private void validaPorMatricula(Usuario usuario) {
+		Optional<Usuario> obj = usuarioRepository.findByMatricula(usuario.getMatricula());
+		if(obj.isPresent() && obj.get().getMatricula() != usuario.getMatricula() ) {
+			throw new DataIntegrityViolationException("MATRICULA ja cadastrada no sistema!");
+		}
 	}
 
 	public List<Usuario> findAll() {

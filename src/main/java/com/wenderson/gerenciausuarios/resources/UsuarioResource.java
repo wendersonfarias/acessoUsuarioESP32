@@ -25,6 +25,7 @@ public class UsuarioResource {
 	@Autowired
 	UsuarioService service;
 	
+	//obtem usuario pela matricula
 	@GetMapping(value="/{matricula}")
 	public ResponseEntity<Usuario> findbyMatricula(@PathVariable String matricula){
 		Usuario obj = this.service.findByMatricula(matricula);
@@ -32,12 +33,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value="/busca-usuario/{id}")
+	/*@GetMapping(value="/busca-usuario/{id}")
 	public ResponseEntity<Usuario> findbyIdFront(@PathVariable Integer id){
 		Usuario obj = this.service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
-	}
+	}*/
 	
 	@GetMapping
 	public ResponseEntity<List<UsuarioDTO>> findAll(){
@@ -48,6 +49,7 @@ public class UsuarioResource {
 		
 	}
 	
+	//cria um novo usuario
 	@PostMapping
 	public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
 		Usuario newobj = service.createUsuario(usuario);
@@ -56,4 +58,6 @@ public class UsuarioResource {
 		
 		
 	}
+	
+	
 }

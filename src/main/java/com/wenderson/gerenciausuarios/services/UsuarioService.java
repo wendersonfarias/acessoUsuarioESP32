@@ -3,6 +3,8 @@ package com.wenderson.gerenciausuarios.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,17 @@ public class UsuarioService {
 	public List<Usuario> findAll() {
 		
 		return usuarioRepository.findAll();
+	}
+
+	public Usuario update(@Valid Usuario usuario) {
+		Usuario user = findByMatricula(usuario.getMatricula());
+		user.setAtivo(usuario.getAtivo());
+		return usuarioRepository.save(user);
+	}
+
+	public void delete(String matricula) {
+		Usuario user = findByMatricula(matricula);
+		usuarioRepository.deleteById(user.getId());
 	}
 
 }

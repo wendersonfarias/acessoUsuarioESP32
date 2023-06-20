@@ -4,9 +4,13 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,13 +55,24 @@ public class UsuarioResource {
 	
 	//cria um novo usuario
 	@PostMapping
-	public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
+	public ResponseEntity<Usuario> create(@Valid @RequestBody Usuario usuario){
 		Usuario newobj = service.createUsuario(usuario);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newobj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{matricula}").buildAndExpand(newobj.getMatricula()).toUri();
 		return ResponseEntity.created(uri).build();
 		
 		
 	}
 	
+	@PatchMapping()
+	public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario){
+		Usuario newUser = service.update(usuario);
+		return ResponseEntity.ok().body(newUser);
+	}
+	
+	@DeleteMapping(value = "/{matricula}")
+	public ResponseEntity<Usuario> delete(@PathVariable String matricula){
+		service.delete(matricula);
+		return ResponseEntity.noContent().build();
+	}
 	
 }

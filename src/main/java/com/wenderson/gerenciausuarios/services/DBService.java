@@ -1,4 +1,4 @@
-package com.wenderson.gerenciausuarios.services;
+/*package com.wenderson.gerenciausuarios.services;
 
 import java.util.Arrays;
 
@@ -34,3 +34,4 @@ public class DBService {
 
 	}
 }
+*/
